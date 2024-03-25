@@ -15,30 +15,30 @@ jobs:
   deploy-dev:
      runs-on: ubuntu-latest
      needs: [ call-build ]
-     name: Deploy to DEV
+     name: Deploy to Dev
      environment: development
 
      steps:
        - run: |
-           echo "Deployment target is DEV"
+           echo "Deployment environment is Development"
        
   deploy-qa:
     runs-on: ubuntu-latest
-    needs: [ call-build ]
-    name: Deploy to DEV
+    needs: [ deploy-dev ]
+    name: Deploy to SandBox
     environment: sandbox
 
     steps:
       - run: |
-          echo "Deployment target is DEV"
+          echo "Deployment environment is Sandbox"
 
       
   deploy-prd:
     runs-on: ubuntu-latest
-    needs: [ call-build ]
-    name: Deploy to DEV
+    needs: [ deploy-qa ]
+    name: Deploy to Prod
     environment: production
 
     steps:
       - run: |
-          echo "Deployment target is DEV"
+          echo "Deployment environment is Production"
